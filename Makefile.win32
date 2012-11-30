@@ -6,6 +6,7 @@ include Makefile.common
 
 VPATH += src test
 LDLIBS += -lws2_32
+RANLIB = ranlib
 
 test-timer: test-timer.o libwait.a
 

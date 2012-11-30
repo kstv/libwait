@@ -1,4 +1,5 @@
 PLATFORM = linux
+RANLIB = ranlib
 
 include Makefile.common
 
