@@ -1,0 +1,17 @@
+CC = gcc
+PLATFORM = win32
+CXXFLAGS += -D_WIN32_
+
+include Makefile.common
+
+VPATH += src test
+LDLIBS += -lws2_32
+
+test-timer: test-timer.o libwait.a
+
+libwait.a: $(OBJECTS)
+	$(AR) crv libwait.a $(OBJECTS)
+	$(RANLIB) libwait.a
+
+clean:
+	del /Q $(OBJECTS)

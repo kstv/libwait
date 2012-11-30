@@ -1,0 +1,15 @@
+PLATFORM = linux
+
+include Makefile.common
+
+VPATH += src test
+LDLIBS += -lrt
+
+test-timer: test-timer.o libwait.a
+
+libwait.a: $(OBJECTS)
+	$(AR) crv libwait.a $(OBJECTS)
+	$(RANLIB) libwait.a
+
+clean:
+	rm -f $(OBJECTS)

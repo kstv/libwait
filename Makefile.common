@@ -1,0 +1,6 @@
+CXXFLAGS += -Iinclude
+OBJECTS  += callout.o module.o \
+	platform-$(PLATFORM).o slotwait.o utils.o slotsock-$(PLATFORM).o
+
+VPATH += src test
+LDLIBS += -lstdc++
