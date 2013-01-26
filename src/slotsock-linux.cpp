@@ -140,7 +140,7 @@ static void do_quick_scan(void *upp)
 		int f_events = events[i].events;
 		sockcbp = (struct sockcb *)events[i].data.ptr;
 
-		if ((EPOLLIN | EPOLLHUP | EPOLLERR) & f_events) {
+		if ((EPOLLIN | EPOLLERR) & f_events) {
 			sockcbp->s_flags |= SF_READY_IN;
 			if (sockcbp->s_rslot == NULL) { 
 				sockcbp->s_event.events &= ~EPOLLIN;
