@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
-#include "wait/platform.h"
 
-#include "wait/module.h"
-#include "wait/callout.h"
-#include "wait/slotwait.h"
+#include "wf.h"
 
 static size_t _still_tick;
 static slotcb _still_timers;

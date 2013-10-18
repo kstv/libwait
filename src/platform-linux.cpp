@@ -1,7 +1,7 @@
 #include <time.h>
 #include <fcntl.h>
 
-#include "wait/platform.h"
+#include "libwf/platform.h"
 
 void setnonblock(int file)
 {

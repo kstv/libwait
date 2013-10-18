@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "wait/module.h"
+#include "libwf/module.h"
 
 void init_stub(void)
 {

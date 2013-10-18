@@ -3,11 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/epoll.h>
-#include "wait/platform.h"
 
-#include "wait/module.h"
-#include "wait/slotwait.h"
-#include "wait/slotsock.h"
+#include "wf.h"
 
 #define MAX_CONN 1000
 #define SF_FIRST_IN   1
