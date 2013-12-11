@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <assert.h>
+#include "wait/platform.h"
 
-#include "wf.h"
+#include "wait/callout.h"
+#include "wait/slotwait.h"
+#include "wait/slotsock.h"
 
 static int _wait_busy = 0;
 static int _wait_rescan = 0;

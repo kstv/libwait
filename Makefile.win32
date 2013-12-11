@@ -1,4 +1,6 @@
-CC = gcc
+CC = i586-mingw32msvc-cc
+CXX = i586-mingw32msvc-c++
+AR  = i586-mingw32msvc-ar
 PLATFORM = win32
 CXXFLAGS += -D_WIN32_
 
@@ -6,7 +8,7 @@ include Makefile.common
 
 VPATH += src test
 LDLIBS += -lws2_32
-RANLIB = ranlib
+RANLIB = i586-mingw32msvc-ranlib
 
 test-timer: test-timer.o libwait.a
 

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "libwf/utils.h"
+#include "wait/utils.h"
 
 static int hex_code(int ch)
 {
