@@ -31,7 +31,7 @@
 #endif
 
 #ifdef _WIN32_
-#include <winsock.h>
+#include <winsock2.h>
 #define assert(exp) do { if (exp); else { printf("assert %s failed %s:%d\n", #exp, __FILE__, __LINE__); Sleep(INFINITE); }; } while ( 0 );
 typedef int socklen_t;
 typedef unsigned long in_addr_t;
