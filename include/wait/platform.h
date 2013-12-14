@@ -59,7 +59,11 @@ typedef unsigned long in_addr_t;
 unsigned int GetTickCount(void);
 #endif
 
+extern int ticks;
+#define tx_getticks GetTickCount
+
 void setnonblock(int fd);
+#define VNET_DECLARE(t, v) extern t v
 
 #endif
 
