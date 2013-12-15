@@ -38,6 +38,16 @@ typedef unsigned long in_addr_t;
 #define ECONNABORTED WSAECONNABORTED
 #define SHUT_WR SD_SEND
 #define bcopy(s, d, l) memcpy(d, s, l)
+typedef unsigned int u_int32_t;
+typedef unsigned char u_int8_t;
+typedef unsigned short u_int16_t;
+typedef unsigned long long u_int64_t;
+typedef unsigned int uint32_t;
+typedef unsigned char uint8_t;
+typedef unsigned short uint16_t;
+typedef unsigned long long uint64_t;
+#define min(a, b) ((a) < (b)? (a): (b))
+#define max(a, b) ((a) < (b)? (b): (a))
 #else
 #include <errno.h>
 #include <unistd.h>
