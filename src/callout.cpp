@@ -1,3 +1,4 @@
+#include <time.h>
 #include <stdio.h>
 #include <assert.h>
 #include "wait/platform.h"
@@ -23,7 +24,7 @@ void callout_reset(struct waitcb *evt, size_t millisec)
 	size_t micro_wheel, macro_wheel;
 
 	waitcb_cancel(evt);
-	evt->wt_value = (millisec + GetTickCount());
+	evt->wt_value = (millisec + tx_getticks());
    	micro_wheel = (evt->wt_value - _micro_tick) / 20;
    	macro_wheel = (evt->wt_value - _macro_tick) / 1000;
 
@@ -54,7 +55,7 @@ void callout_invoke(void *upp)
 	size_t wheel;
 	struct waitcb *event, *evt_next;
 
-	tick = GetTickCount();
+	tick = tx_getticks();
 
 	for ( ; ; ) {
 		if ((int)(tick - _micro_tick - 20) < 0)
@@ -104,11 +105,32 @@ void callout_invoke(void *upp)
 	return;
 }
 
+extern u_int tx_getticks(void)
+{
+#ifndef WIN32
+    struct timespec ts; 
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
+#else
+	LARGE_INTEGER now = {0};
+	static LARGE_INTEGER bootup = {0};
+	static LARGE_INTEGER frequency = {0};
+
+	if (frequency.QuadPart == 0) {
+		QueryPerformanceCounter(&bootup);
+		QueryPerformanceFrequency(&frequency);
+	}
+
+	QueryPerformanceCounter(&now);
+	return (now.QuadPart - bootup.QuadPart) * 1000LL / frequency.QuadPart;
+#endif
+}
+
 static struct waitcb _time_waitcb;
 static void module_init(void)
 {
 	size_t tick;
-	tick = GetTickCount();
+	tick = tx_getticks();
 	_still_tick = tick;
 
 	_micro_tick = tick;

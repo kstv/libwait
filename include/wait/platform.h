@@ -1,9 +1,6 @@
 #ifndef _PLATFORM_H_
 #define _PLATFORM_H_
 
-#undef assert
-#define KASSERT(msg, exp)
-
 #if defined(WIN32) && !defined(_WIN32_)
 #define _WIN32_
 #endif
@@ -32,6 +29,7 @@
 
 #ifdef _WIN32_
 #include <winsock2.h>
+#undef assert
 #define assert(exp) do { if (exp); else { printf("assert %s failed %s:%d\n", #exp, __FILE__, __LINE__); Sleep(INFINITE); }; } while ( 0 );
 typedef int socklen_t;
 typedef unsigned long in_addr_t;
@@ -46,8 +44,6 @@ typedef unsigned int uint32_t;
 typedef unsigned char uint8_t;
 typedef unsigned short uint16_t;
 typedef unsigned long long uint64_t;
-#define min(a, b) ((a) < (b)? (a): (b))
-#define max(a, b) ((a) < (b)? (b): (a))
 #else
 #include <errno.h>
 #include <unistd.h>
@@ -56,6 +52,9 @@ typedef unsigned long long uint64_t;
 #include <sys/select.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#ifdef assert
+#undef assert
+#endif
 #define assert(exp) do { if (exp); else { printf("assert %s failed %s:%d\n", #exp, __FILE__, __LINE__); }; } while ( 0 );
 #define closesocket(s) close(s)
 
@@ -66,14 +65,12 @@ typedef unsigned long long uint64_t;
 #define min(a, b) ((a) < (b)? (a): (b))
 #define WSAEINVAL EINVAL
 #define stricmp strcmp
-unsigned int GetTickCount(void);
 #endif
 
 extern int ticks;
-#define tx_getticks GetTickCount
+extern u_int tx_getticks(void);
 
 void setnonblock(int fd);
-#define VNET_DECLARE(t, v) extern t v
 
 #endif
 
