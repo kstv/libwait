@@ -1,6 +1,8 @@
 #ifndef _PLATFORM_H_
 #define _PLATFORM_H_
 
+#define UNUSED_VAR(x) x = x
+
 #if defined(WIN32) && !defined(_WIN32_)
 #define _WIN32_
 #endif
